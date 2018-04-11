@@ -104,8 +104,3 @@ monitor-js 是一个轻量级前端错误监控插件
     |---------------|------------|-----|
     | captureBefore | 上传之前回调|     |   
 
-
-
-# 参考链接
-
-    https://github.com/joyqi/mobile-device-js
