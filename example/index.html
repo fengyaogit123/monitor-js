@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="id"></div>
+    <script src="https://cdn.bootcss.com/vue/2.5.17-beta.0/vue.min.js"></script>
+    <script src="../lib/monitor.js"></script>
+    <script src="../lib/vuePlugin.js"></script>
+    <script>
+        var monitor = new Monitor({
+            itemID: 'asdjasdtjk21b3k1j2g3',//唯一的项目Id
+            url: '',//若autoPush为true 则自动上报异常 ，跨域需要配置
+            autoPush: true,// 是否自动上报异常 ，默认为false
+            match: ["localhost"],//需要上报的域名 开发环境下可以不选择上报
+            exclude: ['WeixinJSBridge', 'x5onSkinSwitch'],//过滤的错误信息 根据details字段
+        })
+        //需要最先声明
+        monitor
+            .addPlugin(vuePlugin)//添加vueError监听 根据errorHandler函数
+            .install()
+            .on('captureBefore', (data) => {
+                //上报异常触发的回调 data 是上报的参数
+                console.log(data)
+            })
+        new Vue({
+            el: "#id",
+            created: function () {
+                console.log('c')
+                1 / x
+            },
+            render: function (h) {
+                return h('Button', 'click')
+            }
+        })
+    </script>
+</body>
+</html>

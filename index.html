@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+<script type="text/javascript" src="/lib/monitor.js?ad82bd5e1825936e1d34"></script><script type="text/javascript" src="/lib/vue.js?ad82bd5e1825936e1d34"></script></head>
+
+<body>
+    <Button data-action="登录">click</Button>
+    <Button data-action="注册">注册</Button>
+    <script>
+        var monitor = new Monitor({
+            itemID: 'asdjasdtjk21b3k1j2g3',
+            url: '',
+            autoPush: false,
+            match: ["localhost"],//需要上报的域名
+            exclude: ['WeixinJSBridge', 'x5onSkinSwitch'],//过滤的错误信息 根据details
+        })
+        monitor
+            // .addPlugin(vuePlugin)
+            .install()
+            .on('captureBefore', (data) => {
+                console.log(data)
+
+            })
+    </script>
+</body>
+
+</html>

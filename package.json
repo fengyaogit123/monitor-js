@@ -1,0 +1,36 @@
+{
+  "name": "monitor-js",
+  "version": "1.0.3",
+  "description": "monitor-js 是一个轻量级前端错误监控上报插件",
+  "main": "./lib/monitor.js",
+  "scripts": {
+    "test": "",
+    "build": "webpack --config webpack.config.js --colors",
+    "dev": "webpack-dev-server --hot --inline --open"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/fengyaogit123/monitor-js.git"
+  },
+  "keywords": [
+    "monitor",
+    "browser",
+    "monitor-js"
+  ],
+  "author": "1724238345@qq.com",
+  "license": "ISC",
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.4",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-stage-3": "^6.24.1",
+    "html-webpack-plugin": "^3.2.0",
+    "uglifyjs-webpack-plugin": "^1.2.4",
+    "vue": "^2.5.16",
+    "webpack": "^3.6.0",
+    "webpack-dev-server": "^2.9.1"
+  },
+  "dependencies": {
+    "browser-device-js": "^1.0.7"
+  }
+}
