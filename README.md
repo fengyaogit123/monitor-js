@@ -86,7 +86,6 @@ monitor-js 是一个轻量级前端错误监控插件
     | autoPush       | 若autoPush为true 则自动上报异常 ,跨域需要配置   | boolean       | true |
     | match          | 需要上报的域名 ,开发环境下可以不选择上报         | Array<String> | []   |
     | exclude        | 过滤的错误信息 ,根据details字段                 | Array<String> | []   |
-    | exclude        | 过滤的错误信息 ,根据details字段                 | Array<String> | []   |
 
     可自定义扩展参数
 
@@ -96,7 +95,7 @@ monitor-js 是一个轻量级前端错误监控插件
     | install()                         | 安装插件                  |      
     | on(type:string,callback:function) | 监听事件，captureBefore   |  
     | setConfig()                       | 修改配置                  |   
-    |pushException(op:object)           | 上传异常                  |   
+    | pushException(op:object)          | 上传异常                  |   
 
     监听事件
 
