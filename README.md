@@ -74,7 +74,7 @@ monitor-js 是一个轻量级前端错误监控插件
 ## API:
     new Monitor(config)
     | Monitor构造函数 | 说明 | 类型 | 默认值 |
-    |-----|-----|----|
+    |-----|:-----:|:----:|
     | itemID | 唯一项目Id| string | " "  |
     | url | 若autoPush为true 则自动上报异常 ，跨域需要配置|string| " "  |
     | autoPush | 若autoPush为true 则自动上报异常 ，跨域需要配置|boolean| true|
@@ -96,7 +96,8 @@ monitor-js 是一个轻量级前端错误监控插件
     |监听事件type | 说明 | 类型 | 默认值 |
     |-----|-----|----|
     | captureBefore | 上传之前回调|  |   |
-    
+
+
 # 参考链接
 
     https://github.com/joyqi/mobile-device-js
