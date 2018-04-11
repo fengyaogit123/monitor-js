@@ -26,7 +26,7 @@ export default class Monitor extends EventEmitter {
         this.plugins.push(func)
         return this;
     }
-    async captureException(data, callback) {
+    captureException(data, callback) {
         let xhr = new XMLHttpRequest();
         xhr.timeout = 10000;
         xhr.open('POST', this.url, true);
@@ -102,7 +102,7 @@ export default class Monitor extends EventEmitter {
             return href.indexOf(ex) !== -1
         }).length >= 0 ? false : true;
     }
-    async windowError() {
+    windowError() {
         window.onerror = (msg, url, line, col, error) => {
             let details = `${msg}  line：${line}`;
 
@@ -137,7 +137,7 @@ export default class Monitor extends EventEmitter {
 
         }
     }
-    async domEvent() {
+    domEvent() {
         window.addEventListener('click', (e) => {
             let _actions = this.getStorageAction();
             let vnode = this.getHTML(e);

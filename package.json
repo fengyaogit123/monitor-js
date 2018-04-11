@@ -1,6 +1,6 @@
 {
-  "name": "monitor-js",
-  "version": "1.0.3",
+  "name": "monitors-js",
+  "version": "1.0.1",
   "description": "monitor-js 是一个轻量级前端错误监控上报插件",
   "main": "./lib/monitor.js",
   "scripts": {
@@ -13,9 +13,9 @@
     "url": "https://github.com/fengyaogit123/monitor-js.git"
   },
   "keywords": [
-    "monitor",
+    "monitors",
     "browser",
-    "monitor-js"
+    "monitorsjs-js"
   ],
   "author": "1724238345@qq.com",
   "license": "ISC",

@@ -1,6 +1,6 @@
 # 介绍
 
-monitor-js 是一个轻量级前端错误监控插件
+monitors-js 是一个轻量级前端错误监控插件
 # 优点
 
 1. 能够获取客户端浏览器环境
@@ -25,7 +25,7 @@ monitor-js 是一个轻量级前端错误监控插件
 
 通过以下方式都可以下载：
 
-执行`npm i monitor-js`
+执行`npm i monitors-js`
 
 # 如何使用
 
@@ -34,17 +34,17 @@ monitor-js 是一个轻量级前端错误监控插件
 ```html
 
     直接引入
-    <script src="monitor-js/lib/monitor.js"></script>
+    <script src="monitors-js/lib/monitor.js"></script>
     插件引入
-    <script src="monitor-js/lib/vuePlugin.js"></script>
+    <script src="monitors-js/lib/vuePlugin.js"></script>
 
 ```
 ## 模块引入:
 
 ```js
 
-    import Monitor from "monitor-js/lib/monitor.js"
-    import vuePlugin from "monitor-js/lib/vuePlugin.js"
+    import Monitor from "monitors-js/lib/monitor.js"
+    import vuePlugin from "monitors-js/lib/vuePlugin.js"
     var monitor = new Monitor({
         itemID: 'asdjasdtjk21b3k1j2g3',//唯一的项目Id
         url: '',//若autoPush为true 则自动上报异常 ，跨域需要配置
@@ -103,3 +103,54 @@ monitor-js 是一个轻量级前端错误监控插件
     |---------------|------------|-----|
     | captureBefore | 上传之前回调|     |   
 
+## 扩展插件
+```js
+    
+    比如vue框架的扩展插件
+
+    export default function vuePlugin() {
+        const origin = Vue.config.errorHandler||function(){}
+        Vue.config.errorHandler = (error, vm, info) => {
+            let details = error.toString();
+            let route = ''
+            if (vm.$route && vm.$route.meta && vm.$route.meta.title) {
+                route = vm.$route.meta.title
+            } else if (vm.$route) {
+                route = vm.$route.path
+            }
+            let data = {
+                route: route,
+                details: details + '   ' + info,
+                errorDetails: error.stack,
+            }
+            this.pushException(data)//调用此方法提交异常
+
+            origin(arguments)
+        }
+    }
+    window.vuePlugin = vuePlugin
+
+
+```
+
+## 提交数据格式
+
+```js
+
+    {
+        browserName:Chrome
+        phoneSystemType:
+        phoneSystemVer:
+        phoneName:
+        reportTime:
+        url:
+        itemID:
+        email:
+        user:
+        actions:[]
+        route:
+        details:
+        errorDetails:
+    }
+
+```
