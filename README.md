@@ -60,6 +60,11 @@ monitor-js 是一个轻量级前端错误监控插件
             //上报异常触发的回调 data 是上报的参数
             console.log(data)
         })
+    //设置
+    monitor.setConfig({
+        email:"xx@qq.com",
+        userName:"张三"
+    })    
     new Vue({
         el: "#id",
         created: function () {
@@ -72,70 +77,32 @@ monitor-js 是一个轻量级前端错误监控插件
     })
 ```
 ## API:
-```html
-
-    new Monitor(config)
-    <table>
-        <thead>
-            <td>Monitor构造函数</td>
-            <td>说明</td>
-            <td>类型</td>
-            <td>默认值</td>
-        </thead>
-        <tbody>
-            <tr>
-                <td>itemID</td>
-                <td>唯一项目Id</td>
-                <td>string</td>
-                <td></td>
-            </tr>
-            <tr>
-                <td>url</td>
-                <td>若autoPush为true 则自动上报异常 ，跨域需要配置</td>
-                <td>string</td>
-                <td></td>
-            </tr>
-            <tr>
-                <td>autoPush</td>
-                <td>是否自动上传异常，根据url，跨域需要服务端配置</td>
-                <td>boolean</td>
-                <td>true</td>
-            </tr>
-            <tr>
-                <td>match</td>
-                <td>需要上报的域名 开发环境下可以不选择上报</td>
-                <td>Array< String ></td>
-                <td>[]</td>
-            </tr>
-            <tr>
-                <td>exclude</td>
-                <td>过滤的错误信息 根据details字段</td>
-                <td>Array< String ></td>
-                <td>[]</td>
-            </tr>
-            
-        </tbody>
-    </table>
-
-
-````
     new Monitor(config)
 
+    | Monitor构造函数 | 说明                                         | 类型          | 默认值|
+    |----------------|----------------------------------------------|---------------|------|
+    | itemID         | 唯一项目Id                                    | string        | " "  |
+    | url            | 若autoPush为true 则自动上报异常 ,跨域需要配置   | string        | " "  |
+    | autoPush       | 若autoPush为true 则自动上报异常 ,跨域需要配置   | boolean       | true |
+    | match          | 需要上报的域名 ,开发环境下可以不选择上报         | Array<String> | []   |
+    | exclude        | 过滤的错误信息 ,根据details字段                 | Array<String> | []   |
+    | exclude        | 过滤的错误信息 ,根据details字段                 | Array<String> | []   |
 
     可自定义扩展参数
-    | 实例方法 | 说明 | 类型 | 默认值 |
-    |-----|-----|----|
-    | addPlugin(function) | 添加插件|  |   |
-    | install() | 安装插件|  |   |
-    | on(type:string,callback:function) | 监听事件，captureBefore|  |   |
-    | setConfig() | 修改配置|  |   |
-    |pushException(op:object)|上传异常|
 
-监听事件
+    | 实例方法                           | 说明                     |      
+    |-----------------------------------|--------------------------|
+    | addPlugin(function)               | 添加插件                  |     
+    | install()                         | 安装插件                  |      
+    | on(type:string,callback:function) | 监听事件，captureBefore   |  
+    | setConfig()                       | 修改配置                  |   
+    |pushException(op:object)           | 上传异常                  |   
 
-|监听事件type | 说明 | 类型 | 默认值 |
-|-----|-----|----|
-| captureBefore | 上传之前回调|  |   |
+    监听事件
+
+    |监听事件type    | 说明       | 类型 | 
+    |---------------|------------|-----|
+    | captureBefore | 上传之前回调|     |   
 
 
 
