@@ -29,6 +29,10 @@
                 //上报异常触发的回调 data 是上报的参数
                 console.log(data)
             })
+        monitor.setConfig({
+            email: `xx@qq.com`,
+            user: "张三"
+        });
         new Vue({
             el: "#id",
             created: function () {
@@ -41,4 +45,5 @@
         })
     </script>
 </body>
+
 </html>

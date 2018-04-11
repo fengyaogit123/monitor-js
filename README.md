@@ -72,7 +72,31 @@ monitor-js 是一个轻量级前端错误监控插件
     })
 ```
 ## API:
+    new Monitor(config)
+    | Monitor构造函数 | 说明 | 类型 | 默认值 |
+    |-----|-----|----|
+    | itemID | 唯一项目Id| string | " "  |
+    | url | 若autoPush为true 则自动上报异常 ，跨域需要配置|string| " "  |
+    | autoPush | 若autoPush为true 则自动上报异常 ，跨域需要配置|boolean| true|
+    | match | 需要上报的域名 开发环境下可以不选择上报|Array<String>| []|
+    | exclude | 过滤的错误信息 根据details字段|Array<String>| []|
+    | exclude | 过滤的错误信息 根据details字段|Array<String>| []|
 
+    可自定义扩展参数
+    | 实例方法 | 说明 | 类型 | 默认值 |
+    |-----|-----|----|
+    | addPlugin(function) | 添加插件|  |   |
+    | install() | 安装插件|  |   |
+    | on(type:string,callback:function) | 监听事件，captureBefore|  |   |
+    | setConfig() | 安装插件|  |   |
+    |pushException(op:object)|上传异常|
+
+    监听事件
+
+    |监听事件type | 说明 | 类型 | 默认值 |
+    |-----|-----|----|
+    | captureBefore | 上传之前回调|  |   |
+    
 # 参考链接
 
     https://github.com/joyqi/mobile-device-js
