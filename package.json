@@ -31,6 +31,7 @@
     "webpack-dev-server": "^2.9.1"
   },
   "dependencies": {
-    "browser-device-js": "^1.0.7"
+    "browser-device-js": "^1.0.7",
+    "querystring": "^0.2.0"
   }
 }
