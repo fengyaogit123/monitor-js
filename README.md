@@ -19,6 +19,7 @@ monitors-js 是一个轻量级前端错误监控插件
 
 8. 插件形式加载，可扩展性高，轻松自定义扩展
 
+9. 业务埋点，自定义埋点信息
 > 
 
 # 如何获取
@@ -33,12 +34,47 @@ monitors-js 是一个轻量级前端错误监控插件
 
 ```html
 
+
     直接引入
     <script src="monitors-js/lib/monitor.js"></script>
     插件引入
     <script src="monitors-js/lib/vuePlugin.js"></script>
 
 ```
+
+```html
+
+    统计标签点击率
+    <Button action = '{ "type":"adButton","name":"广告位点击" }'>广告位图片</Button>
+
+```
+    1.设置了action属性的标签，被点击后会触发onPointClick 回调，并且序列化后传入参数
+    2.action格式是JSON字符串( 属性名用"type":"" )
+    3.可以自定义属性名称 通过 monitor.setAttrName(" data-ac ")
+```html
+    <img data-ac='{ "type":"adButton","name":"广告位点击" }' src="">
+```
+    4.有些时候，html，body之类的标签被click，我们不需要记录，我们通过  filterTag 过滤 默认过滤了html,body 标签
+
+```js
+    //默认
+    new Monitor({
+        filterTag:function(tag){
+            //自定义标签过滤选项
+            return ['body', 'html','button'].indexOf(tag) === -1
+        }
+    })
+```
+    5.action 属性可以自定义扩展参数，如user 等参数如  action='{"type":"acButton","user":"xxxx"}'
+
+```js
+    ...
+    .on('onPointClick',(data)=>{
+            console.log(data.user)//xxxx
+    })
+
+```
+    注意 action 属性是纯字符串属性，在vue中使用也是使用字符串，不能使用对象！
 ## 模块引入:
 
 ```js
@@ -58,6 +94,11 @@ monitors-js 是一个轻量级前端错误监控插件
         .install()
         .on('captureBefore', (data) => {
             //上报异常触发的回调 data 是上报的参数
+            console.log(data)
+        })
+        .on('onPointClick',(data)=>{
+            // action = '{ "type":"adButton",name:"广告位点击" }'
+            console.log(data.value)
             console.log(data)
         })
     //设置
@@ -101,6 +142,8 @@ monitors-js 是一个轻量级前端错误监控插件
 
     |监听事件type    | 说明       | 类型 | 
     |---------------|------------|-----|
+    | onInstall     | 安装完成回调|     |
+    | onPointClick  | action回调 |     |
     | captureBefore | 上传之前回调|     |   
 
 ## 扩展插件

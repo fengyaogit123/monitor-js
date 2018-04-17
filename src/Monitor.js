@@ -6,13 +6,15 @@ import Device from 'browser-device-js'
 export default class Monitor extends EventEmitter {
     constructor(params = {}) {
         super()
-        let { exclude = [], match = [], url, autoPush = true, ...prop } = params;
+        let { exclude = [], match = [], url, filterTag, autoPush = true, ...prop } = params;
         this.config = prop;
         this.exclude = exclude;
         this.match = match;
         this.url = url;
         this.autoPush = autoPush;
-        this.plugins = []
+        this.plugins = [];
+        this.filterTag = filterTag;
+        this.attrName="action"
     }
     initEvent() {
         this.windowError();
@@ -74,6 +76,8 @@ export default class Monitor extends EventEmitter {
             i++;
         }
         this.initEvent();
+
+        this.emit('onInstall')
         return this
     }
     pushException(obj = {}) {
@@ -139,25 +143,56 @@ export default class Monitor extends EventEmitter {
     }
     domEvent() {
         window.addEventListener('click', (e) => {
+            e = e || window.event;
             let _actions = this.getStorageAction();
-            let vnode = this.getHTML(e);
-            if (!vnode) return
+            let currHtml = this.getCurrHtml(e);
+            if (!currHtml) return
+
             _actions.push({
                 type: e.type,
-                target: vnode,
+                target: currHtml,
                 time: this.dateFormat(new Date(), "yyyy-MM-dd hh:mm:sss")
             })
+
             this.setStorageAction(_actions)
         });
     }
-    getHTML(e) {
-        let { localName, id, className, innerText = '' } = e.target;
-        if (['body', 'html'].indexOf(localName) !== -1) return '';
-        let action = e.target.getAttribute('action')
+    getCurrHtml(e) {
+        const target = e.srcElement ? e.srcElement : e.target;
+        let { localName, id, className, innerText = '' } = target;
+
+        const filterTag = this.filterTag || function (tag) {
+            return ['body', 'html'].indexOf(tag) === -1
+        }
+        if (!filterTag(localName)) return ''
+
+        let action = target.getAttribute(this.attrName)
+        if (action && (action.indexOf("{") !== -1 && action.indexOf("}") !== -1)) {
+            try {
+                let point = JSON.parse(action)
+                this.emit('onPointClick', point)
+            } catch (e) {
+                this.emit('onPointClick', {
+                    value: action
+                })
+            }
+        }
+        innerText = innerText.replace(/\s/g, '').substring(0, 20);
+
         id = id && `id="${id}"` || '';
         className = className && `className="${className}"` || '';
         action = action && `action="${action}"` || '';
         innerText = innerText.replace(/\s/g, '').substring(0, 20);
+
         return `<${localName} ${action} ${id} ${className}>${innerText}</${localName}>`;
+    }
+    setAttrName(name) {
+        if (typeof name !== "string") {
+            throw new Error("name type string！")
+        }
+        this.attrName = name
+    }
+    getAttrName() {
+        return this.attrName;
     }
 }

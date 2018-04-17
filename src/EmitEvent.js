@@ -2,7 +2,6 @@
 export default class EventEmitter {
     constructor() {
         this.listens = {}
-
     }
     on(type, func) {
         let callbacks = this.listens[type];

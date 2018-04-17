@@ -6,11 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-<script type="text/javascript" src="/lib/monitor.js?ad82bd5e1825936e1d34"></script><script type="text/javascript" src="/lib/vue.js?ad82bd5e1825936e1d34"></script></head>
+    <script type="text/javascript" src="/lib/monitor.js?ad82bd5e1825936e1d34"></script>
+    <script type="text/javascript" src="/lib/vue.js?ad82bd5e1825936e1d34"></script>
+</head>
 
 <body>
-    <Button data-action="登录">click</Button>
-    <Button data-action="注册">注册</Button>
+    <Button action='{ "type":"adButton","name":"广告位点击" }'>click</Button>
+    <Button action='{ "type":"adButton","name":"注册" }'>注册</Button>
     <script>
         var monitor = new Monitor({
             itemID: 'asdjasdtjk21b3k1j2g3',
@@ -25,6 +27,11 @@
             .on('captureBefore', (data) => {
                 console.log(data)
 
+            })
+            .on('onPointClick', (data) => {
+                // action = '{ type:"adButton",name:"广告位点击" }'
+                console.log(data.value)
+                console.log(data)
             })
     </script>
 </body>
