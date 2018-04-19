@@ -1,0 +1,28 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'I:\\Node\\node.exe',
+1 verbose cli   'F:\\Users\\jjj\\AppData\\Roaming\\npm\\node_modules\\npm\\bin\\npm-cli.js',
+1 verbose cli   'login',
+1 verbose cli   '--registry',
+1 verbose cli   'http://registry.npmjs.org' ]
+2 info using npm@3.7.5
+3 info using node@v8.9.3
+4 verbose stack Error: canceled
+4 verbose stack     at Interface.<anonymous> (F:\Users\jjj\AppData\Roaming\npm\node_modules\npm\node_modules\read\lib\read.js:66:13)
+4 verbose stack     at emitNone (events.js:106:13)
+4 verbose stack     at Interface.emit (events.js:208:7)
+4 verbose stack     at Interface._ttyWrite (readline.js:775:16)
+4 verbose stack     at ReadStream.onkeypress (readline.js:160:10)
+4 verbose stack     at emitTwo (events.js:126:13)
+4 verbose stack     at ReadStream.emit (events.js:214:7)
+4 verbose stack     at emitKeys (internal/readline.js:420:14)
+4 verbose stack     at emitKeys.next (<anonymous>)
+4 verbose stack     at ReadStream.onData (readline.js:1011:36)
+5 verbose cwd C:\appWork\self-wrok\tswork\devicejs\monitor-js
+6 error Windows_NT 6.1.7601
+7 error argv "I:\\Node\\node.exe" "F:\\Users\\jjj\\AppData\\Roaming\\npm\\node_modules\\npm\\bin\\npm-cli.js" "login" "--registry" "http://registry.npmjs.org"
+8 error node v8.9.3
+9 error npm  v3.7.5
+10 error canceled
+11 error If you need help, you may report this error at:
+11 error     <https://github.com/npm/npm/issues>
+12 verbose exit [ 1, true ]
