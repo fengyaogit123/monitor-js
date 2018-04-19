@@ -46,4 +46,3 @@ module.exports = {
     },
     plugins: plugins
 };
-console.log(process.env.NODE_ENV)
