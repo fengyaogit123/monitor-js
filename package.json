@@ -5,8 +5,8 @@
   "main": "./lib/monitor.js",
   "scripts": {
     "test": "",
-    "build": "webpack --config webpack.config.js --colors",
-    "dev": "webpack-dev-server --hot --inline --open"
+    "build": "set NODE_ENV=production && webpack --config webpack.config.js --colors",
+    "dev": "set NODE_ENV=development && webpack-dev-server --hot --inline --open"
   },
   "repository": {
     "type": "git",

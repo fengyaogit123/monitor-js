@@ -2,6 +2,21 @@ const path = require('path');
 const webpack = require("webpack");
 const Uglify = require('uglifyjs-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+
+
+const plugins = [];
+if (process.env.NODE_ENV == "development") {
+    plugins.push(new HtmlWebpackPlugin({
+        inject: 'head',
+        hash: true,
+        template: path.join(__dirname, 'index.html'),
+        filename: 'index.html',
+    }))
+} else {
+    plugins.push(new Uglify())
+}
+
+
 module.exports = {
     entry: {
         '/lib/monitor': './src/index.js',
@@ -29,13 +44,6 @@ module.exports = {
         progress: true,
         inline: true
     },
-    plugins: [
-        new Uglify(),
-        new HtmlWebpackPlugin({
-            inject: 'head',
-            hash: true,
-            template: path.join(__dirname, 'index.html'),
-            filename: 'index.html',
-        })
-    ]
+    plugins: plugins
 };
+console.log(process.env.NODE_ENV)
