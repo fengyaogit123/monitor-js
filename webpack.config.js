@@ -31,11 +31,11 @@ module.exports = {
     },
     plugins: [
         new Uglify(),
-        // new HtmlWebpackPlugin({
-        //     inject: 'head',
-        //     hash: true,
-        //     template: path.join(__dirname, 'index.html'),
-        //     filename: 'index.html',
-        // })
+        new HtmlWebpackPlugin({
+            inject: 'head',
+            hash: true,
+            template: path.join(__dirname, 'index.html'),
+            filename: 'index.html',
+        })
     ]
 };

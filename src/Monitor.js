@@ -14,7 +14,7 @@ export default class Monitor extends EventEmitter {
         this.autoPush = autoPush;
         this.plugins = [];
         this.filterTag = filterTag;
-        this.attrName="action"
+        this.attrName = "action"
     }
     initEvent() {
         this.windowError();
@@ -29,19 +29,17 @@ export default class Monitor extends EventEmitter {
         return this;
     }
     captureException(data, callback) {
-        let xhr = new XMLHttpRequest();
-        xhr.timeout = 10000;
-        xhr.open('POST', this.url, true);
-        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-        xhr.onreadystatechange = function () {
-            if (xhr.readyState == 4 && (xhr.status == 200 || xhr.status == 304)) {
-                callback && callback.call(this, xhr.responseText);
-            }
-        };
-        xhr.send(QS.stringify({
+        let img = document.createElement('img');
+        let params = QS.stringify({
             ...data,
             actions: JSON.stringify(data.actions)
-        }));
+        })
+
+        img.src = `${this.url}?_t=${+new Date()}${params}`
+        img.style.display = "none"
+
+        document.body.appendChild(img);
+        img.parentNode.removeChild(img);
     }
     getCurrInfo() {
         if (!this.device)
@@ -93,7 +91,9 @@ export default class Monitor extends EventEmitter {
         if (!this.autoPush) {
             return
         }
-        this.captureException(data)
+        setTimeout(() => {
+            this.captureException(data)
+        }, 0);
     }
     isErrorfilter(msg) {
         return this.exclude.filter((ex) => {
