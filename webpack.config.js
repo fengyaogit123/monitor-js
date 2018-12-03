@@ -5,7 +5,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 
 const plugins = [];
-if (process.env.NODE_ENV == "development") {
+if (process.env.NODE_ENV.trim() == "development") {
     plugins.push(new HtmlWebpackPlugin({
         inject: 'head',
         hash: true,
@@ -19,11 +19,11 @@ if (process.env.NODE_ENV == "development") {
 
 module.exports = {
     entry: {
-        '/lib/monitor': './src/index.js',
-        '/lib/vuePlugin': './src/vuePlugin.js'
+        'monitor': './src/index.js',
+        ' vuePlugin': './src/vuePlugin.js'
     },
     output: {
-        filename: "[name].js",
+        filename: "./lib/[name].js",
         libraryTarget: 'umd'
     },
     externals: {
