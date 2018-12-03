@@ -20,7 +20,7 @@ if (process.env.NODE_ENV.trim() == "development") {
 module.exports = {
     entry: {
         'monitor': './src/index.js',
-        ' vuePlugin': './src/vuePlugin.js'
+        'vuePlugin': './src/vuePlugin.js'
     },
     output: {
         filename: "./lib/[name].js",
